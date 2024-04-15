@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <locale.h>
+#include <string.h>
+
+int main()
+{
+    setlocale(LC_ALL, "");
+    char nome[100], sexo;
+    float peso,altura;
+    int opcao;
+
+    printf("Digite o nome completo: ");
+    gets(nome);
+    printf("Digite o peso do %s:", nome);
+    scanf("%f",&peso);
+    printf("Digite a altura de %s (Em Metros):", nome);
+    scanf("%f", &altura);
+    printf("Diga o genero de %s \nH = Homem \nM = mulher\n", nome);
+    scanf("%s", &sexo);
+    
+    
+    float imc = peso / (altura * altura);
+    
+    do{
+        printf("Digite uma opção:\n1 - IMC \n2 - Diagonóstico\n3 - Recomendações\n4 - Sair\n");
+
+        scanf("%d", &opcao);
+        switch(opcao){
+            case 1:
+            	printf ("Seu IMC é %.2f\n", imc);
+                break;
+            case 2:
+
+				 if (imc < 18.5)
+                    printf("Você está abaixo do peso.\n");
+                else if (imc >= 18.5 && imc < 25)
+                    printf("Seu peso está normal.\n");
+                else if (imc >= 25 && imc < 30)
+                    printf("Você está com sobrepeso.\n");
+                else if (imc >= 30 && imc < 35)
+                    printf("Você está com obesidade grau 1.\n");
+                else if (imc >= 35 && imc < 40)
+                    printf("Você está com obesidade grau 2.\n");
+                else
+                    printf("Você está com obesidade grau 3.\n");
+                    
+                break;
+            case 3:
+            printf("Recomendações:\n");
+                if (imc < 18.5) {
+                    if (sexo == 'H')
+                        printf("Exercícios de Hipertrofia.\n");
+                    else if (sexo == 'M')
+                        printf("Exercícios de Calistenia.\n");
+                } else if (imc >= 18.5 && imc < 25) {
+                    printf("Exercícios moderados e leves.\n");
+                } else if (imc >= 25 && imc < 30) {
+                    if (sexo == 'H')
+                        printf("Exercícios aeróbicos e de Hipertrofia moderados.\n");
+                    else if (sexo == 'M')
+                        printf("Exercícios aeróbicos e de Calistenia moderados.\n");
+                } else if (imc >= 30 && imc < 35) {
+                    if (sexo == 'H')
+                        printf("Exercícios aeróbicos e de Hipertrofia intensos.\n");
+                    else if (sexo == 'M')
+                        printf("Exercícios aeróbicos e de Calistenia intensos.\n");
+                } else {
+                    printf("Procure recomendações médicas de um Endocrinologista.\n");
+                }
+        		
+                break;
+            case 4:
+               
+                break;                
+  
+            default:
+                printf("Opção inválida.\n");
+        }
+        
+    }while(opcao != 4);
+    
+    return 0;
+}
